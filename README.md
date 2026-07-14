@@ -1,77 +1,66 @@
 # Trabajo Final Integrador - Física
-
 **Carrera:** Ingeniería en Informática  
 **Cátedra:** Física  
 **Universidad:** Universidad de Mendoza  
 
 ---
 
-## Decisión del proyecto
-
-**Opción elegida: A — Simulación del tiro parabólico con resistencia del aire**
+## 1. Proyecto
+**Título:** Simulación computacional del tiro parabólico: comparación de movimiento ideal y real.
 
 ### Justificación
-
-Elegimos esta opción porque:
-
-1. **Impacto visual** — las trayectorias con y sin resistencia se ven muy distintas y la animación es llamativa
-2. **Dificultad moderada** — la física es cinemática básica (Unidad 2), no requiere conceptos avanzados
-3. **Comparación teoría vs simulación** — la trayectoria ideal tiene solución analítica cerrada, la real se resuelve numéricamente, lo que permite contrastar ambas
-4. **POO natural** — un proyectil es un objeto fácil de modelar con atributos y métodos
+Este proyecto integra los contenidos de cinemática y leyes de Newton con herramientas de modelización computacional en Python. Permite contrastar el movimiento ideal (solución analítica cerrada) con el movimiento real sujeto a resistencia cuadrática del aire (resolución numérica mediante RK4), facilitando un análisis crítico fundamentado en la teoría física.
 
 ---
 
-## Roadmap / Pasos a seguir
+## 2. Entregables
+De acuerdo con las exigencias de la cátedra, el grupo presentará:
 
-| Hito | Descripción | Archivos involucrados |
-|------|-------------|----------------------|
-| 1 | Clase `Proyectil` con atributos, derivadas y métodos de energía | `proyectil.py` |
-| 2 | Función `paso_rk4` y `simular` para evolucionar el sistema | `simulador.py` |
-| 3 | Gráficos comparativos de trayectorias y energía | `graficador.py` |
-| 4 | Animación de la simulación | `graficador.py` |
-| 5 | Orquestación y parámetros iniciales en `main.py` | `main.py` |
-| 6 | Refinamiento de parámetros, ajustes visuales y documentación | Todos |
-
----
-
-## División de tareas (2 integrantes)
-
-| Integrante | Archivos | Responsabilidad |
-|------------|----------|-----------------|
-| **Persona 1** | `proyectil.py` + `simulador.py` | Modelo físico del proyectil + integración numérica RK4 |
-| **Persona 2** | `graficador.py` + `main.py` | Visualizaciones (gráficos y animación) + orquestación |
-
-Ninguno edita el mismo archivo al mismo tiempo.
+1.  **Código fuente en Python:** Debidamente documentado, organizado en módulos y funcional.
+2.  **Informe escrito (máx. 10 páginas):**
+    *   Introducción teórica.
+    *   Desarrollo del modelo físico y método numérico (RK4).
+    *   Resultados obtenidos (gráficos, tablas, animaciones).
+    *   Análisis crítico y comparación: Teoría ideal vs. Simulación real.
+    *   Conclusiones.
+3.  **Exposición oral (15 min):** Defensa del trabajo y demostración en vivo de la simulación.
 
 ---
 
-## Especificaciones técnicas
+## 3. División de tareas
+Para asegurar un equilibrio de carga, se establece la siguiente división basada en el dominio técnico y conceptual:
 
-> **Nota:** Estas son sugerencias iniciales. Pueden ser reevaluadas durante el avance del proyecto si encontramos una mejor forma de organizarnos.
+| Integrante | Área de enfoque | Responsabilidades clave |
+|------------|-----------------|-------------------------|
+| **Persona 1** | **Física y Cálculo** | Modelado matemático, leyes de Newton, ecuaciones de resistencia, integración numérica (RK4), validación de consistencia física. |
+| **Persona 2** | **Visualización e Informe** | Interfaz (GUI/CLI), animaciones (`matplotlib.animation`), coherencia visual, redacción del informe técnico, revisión de formato APA. |
 
-| Aspecto | Elección inicial |
-|---------|-----------------|
-| Lenguaje | Python 3 |
-| Paradigma | Programación Orientada a Objetos |
-| Método numérico | Runge-Kutta 4 (RK4) |
-| Librerías | `numpy`, `matplotlib` (+ `scipy` si es necesario) |
-| Visualización | Gráficos estáticos + animación con `matplotlib.animation` |
-| Organización | Módulos separados por responsabilidad |
+*Ambos integrantes son responsables de la calidad final y de asegurar que el acoplamiento entre el motor físico (Persona 1) y la capa de presentación (Persona 2) sea limpio y mantenible.*
 
 ---
 
-## Criterios de evaluación — Checklist
-
-- [ ] **Modelado físico (30%):** Leyes de Newton, cinemática, ecuaciones correctas
-- [ ] **Calidad de programación (30%):** POO con clases, uso de librerías, código organizado en módulos
-- [ ] **Análisis de resultados (20%):** Comparación trayectoria ideal vs real, gráficos de energía
-- [ ] **Presentación (20%):** Informe claro, animaciones, gráficos con ejes y leyendas
-- [ ] **Extra:** Animación funcionando, RK4 implementado, al menos 3 librerías científicas
+## 4. Roadmap
+| Hito | Descripción | Responsable |
+|------|-------------|-------------|
+| 1 | Definición del modelo físico (Ideal vs. Real) | Persona 1 |
+| 2 | Implementación del motor numérico (RK4) | Persona 1 |
+| 3 | Desarrollo de interfaz y animaciones | Persona 2 |
+| 4 | Integración y validación (física + visual) | Ambos |
+| 5 | Redacción del informe y registro de prompts IA | Persona 2 |
+| 6 | Preparación de la exposición oral | Ambos |
 
 ---
 
-## Material de referencia
+## 5. Uso responsable de IA
+Este proyecto se adhiere a las pautas de la cátedra sobre el uso de Inteligencia Artificial. La IA se utiliza como asistente de aprendizaje para exploración conceptual, verificación de sintaxis y retroalimentación formativa.
 
-- `Material de los profesores/` — PDFs y presentación con la consigna completa
-- Python: `numpy.org`, `matplotlib.org`
-- Runge-Kutta 4: explicación en `simulador.py`
+*   **Política:** El código, el análisis crítico y la defensa son de autoría exclusiva del grupo.
+*   **Validación:** Se incluye en la carpeta `/docs` el **"Registro de uso de IA"** (basado en el Anexo C de la cátedra), donde se detallan los prompts utilizados, el contexto de uso y las validaciones humanas realizadas.
+
+---
+
+## 6. Criterios de evaluación (Checklist)
+- [ ] **Modelado físico (30%):** Correcta aplicación de leyes y ecuaciones.
+- [ ] **Calidad de programación (30%):** POO, modularidad, uso de librerías (`numpy`, `matplotlib`).
+- [ ] **Análisis de resultados (20%):** Comparación trayectoria ideal vs. real (resistencia cuadrática).
+- [ ] **Presentación (20%):** Informe técnico claro, calidad de gráficos y defensa oral.
