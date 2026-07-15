@@ -36,3 +36,9 @@ Resumen de cambios realizados para mejorar la calidad y funcionalidad del proyec
    - Se integró una lógica de ajuste dinámico de los límites de los ejes (zoom) para asegurar la correcta visualización del proyectil y el suelo (y=0).
    - Se actualizó `main.py` para usar esta interfaz interactiva como punto de entrada principal.
    - Se corrigió un error de atributo al detener animaciones previas.
+
+7. Próximas modificaciones (Persona 2 - Parte gráfica):
+   - [ ] Cortar trayectoria en y=0: cuando el proyectil llegue al piso, la simulación debe detenerse (no dibujar valores negativos de y).
+   - [ ] Renombrar variables y etiquetas a español en `graficador.py` (ej: "Hold" → "Fijar", "Lanzar" ya está bien, etiquetas de ejes y sliders en español).
+   - [ ] Verificar y corregir exportación CSV: confirmar que `simulacion_exportada.csv` se genere correctamente con los datos de la última simulación.
+   - [ ] Validar que los tests sigan pasando después de los cambios (4/4).
