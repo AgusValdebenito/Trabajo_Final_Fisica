@@ -1,5 +1,5 @@
 Estado del Proyecto: Trabajo Final Integrador - Física
-Fecha: 14 de julio de 2026
+Fecha: 23 de julio de 2026
 
 Resumen de cambios realizados para mejorar la calidad y funcionalidad del proyecto:
 
@@ -21,24 +21,17 @@ Resumen de cambios realizados para mejorar la calidad y funcionalidad del proyec
 4. Verificación:
    - Se ejecutaron los tests en 'tests/test_simulacion.py' confirmando que la lógica física y el método numérico RK4 funcionan correctamente (4/4 tests pasados).
 
-4.1 Funciones básicas de graficado (graficador.py):
-   - `graficar_trayectorias()`: genera gráfico comparativo X-Y entre trayectoria ideal y real.
-   - `graficar_energia()`: gráfico de energía mecánica vs tiempo para ambos casos.
-   - `animar_trayectoria()`: animación con FuncAnimation de la trayectoria del proyectil.
-   - `configurar_estilo_apa()`: configura formato profesional (serif, tamaños, grid) para todos los gráficos.
-
-4.2 Actualización de simulador.py:
-   - Se agregó `from proyectil import Proyectil` para usar type hints con el tipo `Proyectil` en la función `simular()`.
-
-6. Interfaz Interactiva de Simulación (Añadido en esta sesión):
-   - Se implementó `graficar_interactivo` en `graficador.py` utilizando `Slider` y `Button` para permitir la modificación en tiempo real de v0, theta, altura inicial (y0) y resistencia del aire.
-   - Se añadió un botón "Lanzar" para ejecutar la simulación con los parámetros ajustados, disparando una animación progresiva de la trayectoria.
-   - Se integró una lógica de ajuste dinámico de los límites de los ejes (zoom) para asegurar la correcta visualización del proyectil y el suelo (y=0).
-   - Se actualizó `main.py` para usar esta interfaz interactiva como punto de entrada principal.
-   - Se corrigió un error de atributo al detener animaciones previas.
-
-7. Próximas modificaciones (Persona 2 - Parte gráfica):
-   - [ ] Cortar trayectoria en y=0: cuando el proyectil llegue al piso, la simulación debe detenerse (no dibujar valores negativos de y).
-   - [ ] Renombrar variables y etiquetas a español en `graficador.py` (ej: "Hold" → "Fijar", "Lanzar" ya está bien, etiquetas de ejes y sliders en español).
-   - [ ] Verificar y corregir exportación CSV: confirmar que `simulacion_exportada.csv` se genere correctamente con los datos de la última simulación.
-   - [ ] Validar que los tests sigan pasando después de los cambios (4/4).
+5. Mejoras finales (sesión del 23/07):
+   - Corte automático de la simulación en y=0 en `simulador.py`.
+   - Cambio de etiquetas a español en `graficador.py`.
+   - Mejora de exportación CSV: redondeo a 3 decimales, metadatos, timestamp.
+   - Colores distintos en trayectorias fijadas (ciclo tab10).
+   - Validación de masa > 0 en `Proyectil.__init__`.
+   - Slider de resistencia calibrado a rango 0.0–0.5.
+   - Validación de dt > 0 en `simular()`.
+   - Título corregido: 'Simulación de Tiro Parabólico'.
+   - Limpieza de código muerto: imports no usados, funciones eliminadas, variable `ani` renombrada a `animacion`.
+   - Parámetro t_max dinámico según tiempo de vuelo estimado.
+   - Mensaje de error en Exportar CSV si no hay datos.
+   - Simplificación de `main.py`: solo importa y llama a `graficar_interactivo`.
+   - Todos los cambios verificados: 4/4 tests pasan.

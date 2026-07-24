@@ -1,5 +1,4 @@
 import numpy as np
-from typing import Union
 
 class Proyectil:
     """Representa un proyectil con física básica y resistencia aerodinámica.
@@ -21,6 +20,8 @@ class Proyectil:
         self.vx0 = vx0
         self.vy0 = vy0
         self.masa = masa
+        if self.masa <= 0:
+            raise ValueError("La masa debe ser positiva")
         self.coef_arrastre = coef_arrastre
         self.gravedad = gravedad
 
