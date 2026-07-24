@@ -32,26 +32,38 @@ Para asegurar un equilibrio de carga, se establece la siguiente división basada
 
 | Integrante | Área de enfoque | Responsabilidades clave |
 |------------|-----------------|-------------------------|
-| **Persona 1** | **Física y Cálculo** | Modelado matemático, leyes de Newton, ecuaciones de resistencia, integración numérica (RK4), validación de consistencia física. |
-| **Persona 2** | **Visualización e Informe** | Interfaz (GUI/CLI), animaciones (`matplotlib.animation`), coherencia visual, redacción del informe técnico, revisión de formato APA. |
+| **Agus** | **Física y Cálculo** | Modelado matemático, leyes de Newton, ecuaciones de resistencia, integración numérica (RK4), validación de consistencia física. |
+| **Ale** | **Visualización e Informe** | Interfaz (GUI/CLI), animaciones (`matplotlib.animation`), coherencia visual, redacción del informe técnico, revisión de formato APA. |
 
-*Ambos integrantes son responsables de la calidad final y de asegurar que el acoplamiento entre el motor físico (Persona 1) y la capa de presentación (Persona 2) sea limpio y mantenible.*
+*Ambos integrantes son responsables de la calidad final y de asegurar que el acoplamiento entre el motor físico (Agus) y la capa de presentación (Ale) sea limpio y mantenible.*
 
 ---
 
-## 4. Roadmap
+## 4. Instalación
+```bash
+pip install -r requirements.txt
+```
+
+## 5. Ejecución
+```bash
+python main.py
+```
+
+## 6. Roadmap
 | Hito | Descripción | Responsable |
 |------|-------------|-------------|
-| 1 | Definición del modelo físico (Ideal vs. Real) | Persona 1 |
-| 2 | Implementación del motor numérico (RK4) | Persona 1 |
-| 3 | Desarrollo de interfaz y animaciones | Persona 2 |
+| 1 | Definición del modelo físico (Ideal vs. Real) | Agus |
+| 2 | Implementación del motor numérico (RK4) | Agus |
+| 3 | Desarrollo de interfaz y animaciones | Ale |
 | 4 | Integración y validación (física + visual) | Ambos |
-| 5 | Redacción del informe y registro de prompts IA | Persona 2 |
-| 6 | Preparación de la exposición oral | Ambos |
+| 5 | Mejora de exportación CSV y mensajes de error | Ale |
+| 6 | Corrección de errores y limpieza de código muerto | Ambos |
+| 7 | Redacción del informe y registro de prompts IA | Ale |
+| 8 | Preparación de la exposición oral | Ambos |
 
 ---
 
-## 5. Uso responsable de IA
+## 7. Uso responsable de IA
 Este proyecto se adhiere a las pautas de la cátedra sobre el uso de Inteligencia Artificial. La IA se utiliza como asistente de aprendizaje para exploración conceptual, verificación de sintaxis y retroalimentación formativa.
 
 *   **Política:** El código, el análisis crítico y la defensa son de autoría exclusiva del grupo.
@@ -59,8 +71,17 @@ Este proyecto se adhiere a las pautas de la cátedra sobre el uso de Inteligenci
 
 ---
 
-## 6. Criterios de evaluación (Checklist)
+## 8. Criterios de evaluación (Checklist)
 - [ ] **Modelado físico (30%):** Correcta aplicación de leyes y ecuaciones.
 - [ ] **Calidad de programación (30%):** POO, modularidad, uso de librerías (`numpy`, `matplotlib`).
 - [ ] **Análisis de resultados (20%):** Comparación trayectoria ideal vs. real (resistencia cuadrática).
 - [ ] **Presentación (20%):** Informe técnico claro, calidad de gráficos y defensa oral.
+
+## 9. Funcionalidades implementadas
+- Interfaz interactiva con sliders (Velocidad, Ángulo, Altura inicial, Coef. arrastre)
+- Botón "Lanzar" con animación progresiva de la trayectoria
+- Checkbox "Fijar" para superponer trayectorias con colores distintos
+- Exportación de datos a CSV con metadatos y timestamp
+- Corte automático de la simulación al llegar al piso (y=0)
+- Cálculo dinámico del tiempo de vuelo
+- Validación de parámetros (masa > 0, dt > 0)

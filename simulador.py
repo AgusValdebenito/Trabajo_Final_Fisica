@@ -35,6 +35,8 @@ def simular(proyectil: Proyectil, t_max: float, dt: float,
         Tuple[np.ndarray, np.ndarray]: (tiempos, estados) donde estados 
                                        contiene [x, y, vx, vy].
     """
+    if dt <= 0:
+        raise ValueError("dt debe ser positivo")
     estado = np.array([proyectil.x0, proyectil.y0, proyectil.vx0, proyectil.vy0], dtype=float)
     tiempos = [0.0]
     estados = [estado.copy()]
@@ -44,4 +46,6 @@ def simular(proyectil: Proyectil, t_max: float, dt: float,
         estado = paso_rk4(lambda y, t: proyectil.derivadas(y, con_resistencia), estado, t, dt)
         tiempos.append(t)
         estados.append(estado.copy())
+        if estado[1] < 0:
+            break
     return np.array(tiempos), np.array(estados)

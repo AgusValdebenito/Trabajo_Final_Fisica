@@ -1,6 +1,6 @@
 from proyectil import Proyectil
 from simulador import simular
-from graficador import graficar_trayectorias, graficar_energia, animar_trayectoria, graficar_interactivo
+from graficador import graficar_interactivo
 
 def main():
     # Configuración de parámetros iniciales
@@ -11,11 +11,9 @@ def main():
         'gravedad': 9.81
     }
     p = Proyectil(**params)
-    t_max = 4.0
-    dt = 0.01
 
     # Ejecución de la interfaz interactiva
-    graficar_interactivo(p, t_max, dt, simular)
+    graficar_interactivo(p, 0.01, simular)
 
 if __name__ == "__main__":
     main()
