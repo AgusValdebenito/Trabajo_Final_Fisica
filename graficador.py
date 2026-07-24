@@ -27,7 +27,7 @@ def graficar_interactivo(proyectil: Proyectil, dt: float,
     """Interfaz interactiva para modificar parámetros."""
     configurar_estilo_apa()
     fig, ax = plt.subplots(figsize=(10, 8))
-    plt.subplots_adjust(bottom=0.35)
+    plt.subplots_adjust(bottom=0.45)
 
     v0_init = np.sqrt(proyectil.vx0**2 + proyectil.vy0**2)
     theta_init = np.degrees(np.arctan2(proyectil.vy0, proyectil.vx0))
@@ -37,23 +37,28 @@ def graficar_interactivo(proyectil: Proyectil, dt: float,
     ax.set_title('Simulación de Tiro Parabólico')
     ax.grid(True)
     
-    ax_v0 = plt.axes([0.2, 0.23, 0.65, 0.03])
-    ax_theta = plt.axes([0.2, 0.18, 0.65, 0.03])
-    ax_y0 = plt.axes([0.2, 0.13, 0.65, 0.03])
-    ax_arrastre = plt.axes([0.2, 0.08, 0.65, 0.03])
+    ax_v0 = plt.axes([0.2, 0.40, 0.65, 0.03])
+    ax_theta = plt.axes([0.2, 0.35, 0.65, 0.03])
+    ax_y0 = plt.axes([0.2, 0.30, 0.65, 0.03])
+    ax_arrastre = plt.axes([0.2, 0.25, 0.65, 0.03])
+    ax_masa = plt.axes([0.2, 0.20, 0.65, 0.03])
     
     s_v0 = Slider(ax_v0, 'Velocidad [m/s]', 0.1, 100.0, valinit=v0_init)
     s_theta = Slider(ax_theta, 'Ángulo [°]', 0.0, 90.0, valinit=theta_init)
     s_y0 = Slider(ax_y0, 'Altura inicial [m]', 0.0, 50.0, valinit=proyectil.y0)
     s_arrastre = Slider(ax_arrastre, 'Coef. arrastre [kg/s]', 0.0, 0.5, valinit=proyectil.coef_arrastre)
+    s_masa = Slider(ax_masa, 'Masa [kg]', 0.1, 20.0, valinit=proyectil.masa)
     
-    ax_button = plt.axes([0.8, 0.02, 0.15, 0.04])
+    ax_button = plt.axes([0.43, 0.03, 0.15, 0.05])
     btn_lanzar = Button(ax_button, 'Lanzar')
     
-    ax_hold = plt.axes([0.05, 0.02, 0.1, 0.04])
+    ax_hold = plt.axes([0.28, 0.03, 0.10, 0.05])
     cb_hold = CheckButtons(ax_hold, ['Fijar'], [False])
     
-    ax_export = plt.axes([0.35, 0.02, 0.15, 0.04])
+    ax_comparativa = plt.axes([0.05, 0.03, 0.18, 0.05])
+    cb_comparativa = CheckButtons(ax_comparativa, ['Ideal vs Real'], [False])
+    
+    ax_export = plt.axes([0.63, 0.03, 0.15, 0.05])
     btn_export = Button(ax_export, 'Exportar CSV')
     
     animacion = None
@@ -65,11 +70,13 @@ def graficar_interactivo(proyectil: Proyectil, dt: float,
         theta = np.radians(s_theta.val)
         y0 = max(0.0, s_y0.val)
         arrastre = max(0.0, s_arrastre.val)
+        masa = max(0.1, s_masa.val)
         
         proyectil.vx0 = v0 * np.cos(theta)
         proyectil.vy0 = v0 * np.sin(theta)
         proyectil.y0 = y0
         proyectil.coef_arrastre = arrastre
+        proyectil.masa = masa
         
     def ejecutar_lanzamiento(event):
         nonlocal animacion, last_results
@@ -82,27 +89,59 @@ def graficar_interactivo(proyectil: Proyectil, dt: float,
         
         t_vuelo_est = (proyectil.vy0 + np.sqrt(proyectil.vy0**2 + 2 * proyectil.gravedad * proyectil.y0)) / proyectil.gravedad
         t_max_dinamico = max(t_vuelo_est * 1.5, 2.0)
-        tiempos_nuevos, estados_nuevos = funcion_simular(proyectil, t_max_dinamico, dt, con_resistencia=True)
+        
+        def plotear_trayectoria(con_resistencia, label, estilo='-'):
+            tiempos, estados = funcion_simular(proyectil, t_max_dinamico, dt, con_resistencia=con_resistencia)
+            color = plt.cm.tab10(len(ax.lines) % 10)
+            linea, = ax.plot(estados[:, 0], estados[:, 1], color=color, linestyle=estilo, label=label)
+            return tiempos, estados
+        
+        if cb_comparativa.get_status()[0]:
+            # Ideal
+            plotear_trayectoria(False, 'Ideal', '--')
+            # Real
+            tiempos_nuevos, estados_nuevos = plotear_trayectoria(True, 'Real', '-')
+        else:
+            # Solo Real
+            tiempos_nuevos, estados_nuevos = plotear_trayectoria(True, 'Real', '-')
+            
         last_results = (tiempos_nuevos, estados_nuevos)
         
-        color = plt.cm.tab10(len(ax.lines) % 10)
-        linea, = ax.plot(estados_nuevos[:, 0], estados_nuevos[:, 1], color=color)
+        # Animacion (sobre la trayectoria real)
         punto, = ax.plot([], [], 'ro', markersize=8)
+        txt_metrics = ax.text(0.02, 0.98, '', transform=ax.transAxes, verticalalignment='top', fontsize=9, bbox=dict(boxstyle='round', facecolor='white', alpha=0.7))
         
         x_min, x_max = np.min(estados_nuevos[:, 0]), np.max(estados_nuevos[:, 0])
         y_max = np.max(estados_nuevos[:, 1])
         
-        padding = 5
-        ax.set_xlim(x_min - padding, x_max + padding)
-        ax.set_ylim(0 - padding, y_max + padding)
+        # Padding dinámico: 5% del rango, mínimo 2 metros
+        pad_x = max(2.0, (x_max - min(0, x_min)) * 0.05)
+        pad_y = max(2.0, y_max * 0.05)
+        
+        ax.set_xlim(min(0, x_min - pad_x), x_max + pad_x)
+        ax.set_ylim(min(0, -pad_y), y_max + pad_y)
+        
+        # Pre-calculos para metricas
+        idx_ground = np.where(estados_nuevos[:, 1] >= 0)[0][-1] if np.any(estados_nuevos[:, 1] >= 0) else len(estados_nuevos) - 1
+        alcance_max = round(estados_nuevos[idx_ground, 0], 2)
+        altura_max = round(y_max, 2)
+        tiempo_vuelo = round(tiempos_nuevos[idx_ground], 2)
         
         def init():
             punto.set_data([], [])
-            return punto,
+            txt_metrics.set_text('')
+            return punto, txt_metrics
         
         def update(frame):
-            punto.set_data([estados_nuevos[frame, 0]], [estados_nuevos[frame, 1]])
-            return punto,
+            x, y, vx, vy = estados_nuevos[frame]
+            punto.set_data([x], [y])
+            
+            # Actualizar métricas
+            e_mec = proyectil.masa * proyectil.gravedad * y + 0.5 * proyectil.masa * (vx**2 + vy**2)
+            metrics_str = f"Alcance: {alcance_max} m\nAltura: {altura_max} m\nT. Vuelo: {tiempo_vuelo} s\nE. Mec: {e_mec:.1f} J"
+            txt_metrics.set_text(metrics_str)
+            
+            return punto, txt_metrics
         
         animacion = FuncAnimation(fig, update, frames=len(estados_nuevos), init_func=init, blit=True, interval=20, repeat=False)
         fig.canvas.draw_idle()
@@ -138,6 +177,7 @@ def graficar_interactivo(proyectil: Proyectil, dt: float,
     s_theta.on_changed(actualizar_parametros)
     s_y0.on_changed(actualizar_parametros)
     s_arrastre.on_changed(actualizar_parametros)
+    s_masa.on_changed(actualizar_parametros)
     btn_lanzar.on_clicked(ejecutar_lanzamiento)
     btn_export.on_clicked(exportar_csv)
     
