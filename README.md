@@ -27,17 +27,13 @@ De acuerdo con las exigencias de la cátedra, el grupo presentará:
 
 ---
 
-## 3. División de tareas
-Para asegurar un equilibrio de carga, se establece la siguiente división basada en el dominio técnico y conceptual:
-
-| Integrante | Área de enfoque | Responsabilidades clave |
-|------------|-----------------|-------------------------|
-| **Agus** | **Física y Cálculo** | Modelado matemático, leyes de Newton, ecuaciones de resistencia, integración numérica (RK4), validación de consistencia física. |
-| **Ale** | **Visualización e Informe** | Interfaz (GUI/CLI), animaciones (`matplotlib.animation`), coherencia visual, redacción del informe técnico, revisión de formato APA. |
-
-*Ambos integrantes son responsables de la calidad final y de asegurar que el acoplamiento entre el motor físico (Agus) y la capa de presentación (Ale) sea limpio y mantenible.*
-
----
+## 3. Tareas realizadas
+- Modelado matemático del tiro parabólico con y sin resistencia aerodinámica
+- Implementación del método numérico RK4 para integración de EDOs
+- Desarrollo de interfaz gráfica interactiva con sliders, botones y animaciones
+- Exportación de datos a CSV con metadatos
+- Validación física y numérica de los resultados
+- Redacción del informe técnico
 
 ## 4. Instalación
 ```bash
@@ -49,34 +45,16 @@ pip install -r requirements.txt
 python main.py
 ```
 
-## 6. Roadmap
-| Hito | Descripción | Responsable |
-|------|-------------|-------------|
-| 1 | Redacción del informe técnico | Ale |
-| 2 | Registro detallado de uso de IA | Ale |
-| 3 | Preparación de la defensa oral | Ambos |
-
----
-
-## 7. Uso responsable de IA
+## 6. Uso responsable de IA
 Este proyecto se adhiere a las pautas de la cátedra sobre el uso de Inteligencia Artificial. La IA se utiliza como asistente de aprendizaje para exploración conceptual, verificación de sintaxis y retroalimentación formativa.
 
 *   **Política:** El código, el análisis crítico y la defensa son de autoría exclusiva del grupo.
-*   **Validación:** Se incluye en la carpeta `/docs` el **"Registro de uso de IA"** (basado en el Anexo C de la cátedra), donde se detallan los prompts utilizados, el contexto de uso y las validaciones humanas realizadas.
-
----
-
-## 8. Criterios de evaluación (Checklist)
-- [ ] **Modelado físico (30%):** Correcta aplicación de leyes y ecuaciones.
-- [ ] **Calidad de programación (30%):** POO, modularidad, uso de librerías (`numpy`, `matplotlib`).
-- [ ] **Análisis de resultados (20%):** Comparación trayectoria ideal vs. real (resistencia cuadrática).
-- [ ] **Presentación (20%):** Informe técnico claro, calidad de gráficos y defensa oral.
-
+*   **Validación:** Se incluye un registro de uso de IA en el anexo del informe, detallando los prompts utilizados y las validaciones humanas realizadas.
 
 ---
 
 
-## 9. Funcionalidades implementadas
+## 7. Funcionalidades implementadas
 - Interfaz interactiva con sliders (Velocidad, Ángulo, Altura inicial, Coef. arrastre)
 - Botón "Lanzar" con animación progresiva de la trayectoria
 - Checkbox "Fijar" para superponer trayectorias con colores distintos

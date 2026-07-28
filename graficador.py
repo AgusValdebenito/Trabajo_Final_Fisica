@@ -27,7 +27,7 @@ def graficar_interactivo(proyectil: Proyectil, dt: float,
     """Interfaz interactiva para modificar parámetros."""
     configurar_estilo_apa()
     fig, ax = plt.subplots(figsize=(10, 8))
-    plt.subplots_adjust(bottom=0.45)
+    plt.subplots_adjust(bottom=0.5)
 
     v0_init = np.sqrt(proyectil.vx0**2 + proyectil.vy0**2)
     theta_init = np.degrees(np.arctan2(proyectil.vy0, proyectil.vx0))
@@ -107,6 +107,13 @@ def graficar_interactivo(proyectil: Proyectil, dt: float,
             
         last_results = (tiempos_nuevos, estados_nuevos)
         
+        # Limpiar textos y puntos anteriores para evitar superposición
+        for txt in ax.texts:
+            txt.remove()
+        for line in ax.lines:
+            if line.get_marker() == 'o':
+                line.remove()
+
         # Animacion (sobre la trayectoria real)
         punto, = ax.plot([], [], 'ro', markersize=8)
         txt_metrics = ax.text(0.02, 0.98, '', transform=ax.transAxes, verticalalignment='top', fontsize=9, bbox=dict(boxstyle='round', facecolor='white', alpha=0.7))
