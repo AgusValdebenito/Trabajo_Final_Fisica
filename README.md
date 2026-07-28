@@ -52,14 +52,9 @@ python main.py
 ## 6. Roadmap
 | Hito | Descripción | Responsable |
 |------|-------------|-------------|
-| 1 | Definición del modelo físico (Ideal vs. Real) | Agus |
-| 2 | Implementación del motor numérico (RK4) | Agus |
-| 3 | Desarrollo de interfaz y animaciones | Ale |
-| 4 | Integración y validación (física + visual) | Ambos |
-| 5 | Mejora de exportación CSV y mensajes de error | Ale |
-| 6 | Corrección de errores y limpieza de código muerto | Ambos |
-| 7 | Redacción del informe y registro de prompts IA | Ale |
-| 8 | Preparación de la exposición oral | Ambos |
+| 1 | Redacción del informe técnico | Ale |
+| 2 | Registro detallado de uso de IA | Ale |
+| 3 | Preparación de la defensa oral | Ambos |
 
 ---
 
@@ -77,25 +72,9 @@ Este proyecto se adhiere a las pautas de la cátedra sobre el uso de Inteligenci
 - [ ] **Análisis de resultados (20%):** Comparación trayectoria ideal vs. real (resistencia cuadrática).
 - [ ] **Presentación (20%):** Informe técnico claro, calidad de gráficos y defensa oral.
 
-## 10. Mejoras sugeridas (Persona 2 - Ale)
-
-Ideas para mejorar el resultado final del simulador, priorizadas por impacto:
-
-### Alta prioridad
-- [ ] **Comparacion ideal vs real**: al presionar "Lanzar", mostrar ambas trayectorias (con y sin resistencia) en el mismo grafico para contrastarlas visualmente
-- [ ] **Metricas en pantalla**: agregar texto en el grafico con alcance maximo, altura maxima, tiempo de vuelo y energia mecanica final
-
-### Media prioridad
-- [ ] **Slider de masa**: agregar control para modificar la masa del proyectil (rango 0.1 a 20 kg)
-- [ ] **Pausa/Reanudar**: boton para pausar y reanudar la animacion
-- [ ] **Vector velocidad**: flecha que muestre direccion y magnitud de la velocidad durante la animacion
-
-### Para la entrega (obligatorio)
-- [ ] **Registro de uso de IA**: completar el registro de prompts segun el Anexo C de la catedra
-- [ ] **Comentarios en el codigo**: documentar las funciones principales
-- [ ] **Informe escrito**: redactar la introduccion teorica, desarrollo, resultados y conclusiones
 
 ---
+
 
 ## 9. Funcionalidades implementadas
 - Interfaz interactiva con sliders (Velocidad, Ángulo, Altura inicial, Coef. arrastre)

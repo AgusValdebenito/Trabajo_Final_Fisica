@@ -37,11 +37,11 @@ def graficar_interactivo(proyectil: Proyectil, dt: float,
     ax.set_title('Simulación de Tiro Parabólico')
     ax.grid(True)
     
-    ax_v0 = plt.axes([0.2, 0.40, 0.65, 0.03])
-    ax_theta = plt.axes([0.2, 0.35, 0.65, 0.03])
-    ax_y0 = plt.axes([0.2, 0.30, 0.65, 0.03])
-    ax_arrastre = plt.axes([0.2, 0.25, 0.65, 0.03])
-    ax_masa = plt.axes([0.2, 0.20, 0.65, 0.03])
+    ax_v0 = plt.axes((0.2, 0.40, 0.65, 0.03))
+    ax_theta = plt.axes((0.2, 0.35, 0.65, 0.03))
+    ax_y0 = plt.axes((0.2, 0.30, 0.65, 0.03))
+    ax_arrastre = plt.axes((0.2, 0.25, 0.65, 0.03))
+    ax_masa = plt.axes((0.2, 0.20, 0.65, 0.03))
     
     s_v0 = Slider(ax_v0, 'Velocidad [m/s]', 0.1, 100.0, valinit=v0_init)
     s_theta = Slider(ax_theta, 'Ángulo [°]', 0.0, 90.0, valinit=theta_init)
@@ -49,16 +49,16 @@ def graficar_interactivo(proyectil: Proyectil, dt: float,
     s_arrastre = Slider(ax_arrastre, 'Coef. arrastre [kg/s]', 0.0, 0.5, valinit=proyectil.coef_arrastre)
     s_masa = Slider(ax_masa, 'Masa [kg]', 0.1, 20.0, valinit=proyectil.masa)
     
-    ax_button = plt.axes([0.43, 0.03, 0.15, 0.05])
+    ax_button = plt.axes((0.43, 0.03, 0.15, 0.05))
     btn_lanzar = Button(ax_button, 'Lanzar')
     
-    ax_hold = plt.axes([0.28, 0.03, 0.10, 0.05])
+    ax_hold = plt.axes((0.28, 0.03, 0.10, 0.05))
     cb_hold = CheckButtons(ax_hold, ['Fijar'], [False])
     
-    ax_comparativa = plt.axes([0.05, 0.03, 0.18, 0.05])
+    ax_comparativa = plt.axes((0.05, 0.03, 0.18, 0.05))
     cb_comparativa = CheckButtons(ax_comparativa, ['Ideal vs Real'], [False])
     
-    ax_export = plt.axes([0.63, 0.03, 0.15, 0.05])
+    ax_export = plt.axes((0.63, 0.03, 0.15, 0.05))
     btn_export = Button(ax_export, 'Exportar CSV')
     
     animacion = None
